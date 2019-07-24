@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/temperature', methods=['POST'])
 def temperature():
     IP_Address = request.form['zip']
-    newDataBase = "refac"
+    newDataBase = "ipDATABASE"
     if conn.exists(newDataBase) == 1:
         print("Database exist")
         newData = conn.hmget(newDataBase, "ip")
@@ -23,7 +23,7 @@ def temperature():
             ip_add = json_object['ip'];ip_cont = json_object['continent_name'];ip_count = json_object['country_name'];ip_state = json_object['region_name'];ip_lat = json_object['latitude'];ip_long = json_object['longitude']
 
         return render_template('temperature.html', temp=ip_add, cont=ip_cont, count=ip_count, lati=ip_lat, longi=ip_long, state=ip_state)
-        
+
     else:
         print("Database Do not exist")
         json_, json_object = removeNull(IP_Address, newDataBase)
